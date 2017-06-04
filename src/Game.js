@@ -12,6 +12,7 @@ class Game extends Component {
     super(props)
 
     this.state = {
+      goal: 1000,
       p1: {
         name: 'P1',
         points: 0
@@ -22,12 +23,12 @@ class Game extends Component {
       },
       current: 1,
       overlay: {
-        bonus: false,
+        bonus: true,
         target: false,
         defense: false
       },
       statement: {
-        bonus: 0,
+        bonus: null,
         target: null,
         claim: null,
         defense: null
@@ -37,12 +38,57 @@ class Game extends Component {
     this.onBonusSelected = this.onBonusSelected.bind(this)
     this.onTargetSelected = this.onTargetSelected.bind(this)
     this.onDefenseSelected = this.onDefenseSelected.bind(this)
+    this.switchPlayers = this.switchPlayers.bind(this)
   }
 
   componentDidMount() {
-    this.getInitialScore()
+    const difficulty = this.props.match.params.difficulty
 
     this.setState({
+      goal: difficulty === 'short' ? 10 : difficulty === 'medium' ? 20 : 40
+    })
+  }
+
+  componentDidUpdate() {
+    const { bonus, target, claim, defense } = this.state.statement
+
+    if (bonus === null || target === null || claim === null || defense === null) {
+      return
+    }
+
+    const attacker = this.getCurrentAttacker()
+    const defender = this.getCurrentDefender()
+
+    const baseValue = bonus ? 2 : 1
+
+    if (defense !== target) {
+      this.setState({
+        [this.state.current === 1 ? 'p1' : 'p2']: {
+          ...attacker,
+          points: attacker.points + (claim !== target ? baseValue * 2 : baseValue)
+        }
+      })
+    } else {
+      this.setState({
+        [this.state.current === 1 ? 'p2' : 'p1']: {
+          ...defender,
+          points: defender.points + (claim !== target ? baseValue * 2 : baseValue)
+        }
+      })
+    }
+
+    this.switchPlayers()
+  }
+
+  switchPlayers() {
+    this.setState({
+      current: this.state.current === 1 ? 2 : 1,
+      statement: {
+        bonus: null,
+        target: null,
+        claim: null,
+        defense: null
+      },
       overlay: {
         ...this.state.overlay,
         bonus: true
@@ -56,29 +102,6 @@ class Game extends Component {
 
   getCurrentDefender() {
     return this.state.current === 1 ? this.state.p2 : this.state.p1
-  }
-
-  getInitialScore() {
-    let points = 0
-
-    switch (this.props.match.params.difficulty) {
-      case 'short':
-        points = 5
-        break
-      case 'medium':
-        points = 10
-        break
-      case 'long':
-        points = 20
-        break
-      default:
-        points = 0
-    }
-
-    this.setState({
-      p1: { ...this.state.p1, points },
-      p2: { ...this.state.p2, points }
-    })
   }
 
   onBonusSelected(bonus) {
