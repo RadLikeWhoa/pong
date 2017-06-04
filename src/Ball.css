@@ -1,0 +1,15 @@
+.ball {
+  position: absolute;
+  top: 47vh;
+  height: 2vh;
+  width: 2vh;
+  background-color: #fff;
+}
+
+.ball-left {
+  left: 3em;
+}
+
+.ball-right {
+  right: 3em;
+}

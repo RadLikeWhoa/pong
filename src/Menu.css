@@ -1,0 +1,24 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.selection-list {
+  width: 15em;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.selection-list .button {
+  display: block;
+  margin-bottom: 1.5em;
+}
+
+.selection-list li:last-child .button {
+  margin-bottom: 0;
+}

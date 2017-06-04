@@ -1,0 +1,82 @@
+.target {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  top: 2vh;
+  bottom: 2vh;
+  left: 12em;
+  right: 12em;
+  padding-bottom: 1em;
+}
+
+.target.is-visible {
+  display: flex;
+}
+
+.target-right {
+  align-items: flex-start;
+  padding-left: 1em;
+  text-align: left;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, #000 50%);
+}
+
+.target-left {
+  align-items: flex-end;
+  padding-right: 1em;
+  text-align: right;
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0) 50%, #000 50%);
+}
+
+.target-explanation p {
+  margin-bottom: 0;
+}
+
+.target-options,
+.claim-options {
+  position: absolute;
+  top: 1em;
+  bottom: 1em;
+  width: 4em;
+}
+
+.target-right .target-options {
+  right: 1em;
+}
+
+.target-left .target-options {
+  left: 1em;
+}
+
+.target-right .claim-options {
+  right: 6em;
+}
+
+.target-left .claim-options {
+  left: 6em;
+}
+
+.target-options div,
+.claim-options div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(50% - 0.5em);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.target-options .target-top,
+.claim-options .claim-top {
+  top: 0;
+}
+
+.target-options .target-bottom,
+.claim-options .claim-bottom {
+  bottom: 0;
+}
+
+.target-options .is-hidden {
+  display: none;
+}

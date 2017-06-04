@@ -1,0 +1,66 @@
+.defense {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  top: 2vh;
+  bottom: 2vh;
+  left: 12em;
+  right: 12em;
+  padding-bottom: 1em;
+}
+
+.defense.is-visible {
+  display: flex;
+}
+
+.defense-right {
+  align-items: flex-end;
+  padding-right: 6em;
+  text-align: right;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, #000 50%);
+}
+
+.defense-left {
+  align-items: flex-start;
+  padding-left: 6em;
+  text-align: left;
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0) 50%, #000 50%);
+}
+
+.defense-explanation p {
+  margin-bottom: 0;
+}
+
+.defense-options {
+  position: absolute;
+  top: 1em;
+  bottom: 1em;
+  width: 4em;
+}
+
+.defense-right .defense-options {
+  right: 1em;
+}
+
+.defense-left .defense-options {
+  left: 1em;
+}
+
+.defense-options div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(50% - 0.5em);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.defense-options .defense-top {
+  top: 0;
+}
+
+.defense-options .defense-bottom {
+  bottom: 0;
+}

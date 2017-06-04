@@ -1,0 +1,12 @@
+.game {
+  display: flex;
+  height: 100vh;
+}
+
+.field {
+  position: relative;
+  width: calc(100vw - 24em);
+  height: 100vh;
+  border-top: 2vh solid #fff;
+  border-bottom: 2vh solid #fff;
+}

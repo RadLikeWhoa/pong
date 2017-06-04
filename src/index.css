@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: 100%/1.5 "Press Start 2P", sans-serif;
+  color: #fff;
+  background-color: #000;
+}
+
+h1,
+p,
+ul,
+input {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 0.75em;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-block;
+  padding: 1em 2em;
+  color: #000;
+  font: inherit;
+  background-color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+}
+
+input {
+  color: #fff;
+  font: inherit;
+  padding: 0.5em;
+  border: 5px solid #fff;
+  background-color: #000;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+input:focus {
+  cursor: text;
+}

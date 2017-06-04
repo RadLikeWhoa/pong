@@ -1,0 +1,16 @@
+.bet {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2vh;
+  bottom: 2vh;
+  left: 12em;
+  right: 12em;
+  background-color: #000;
+}
+
+.bet.is-visible {
+  display: flex;
+}
