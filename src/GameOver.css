@@ -1,0 +1,20 @@
+.over {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2vh;
+  bottom: 2vh;
+  left: 12em;
+  right: 12em;
+  background-color: #000;
+}
+
+.over .button {
+  display: inline-block;
+}
+
+.over .button:first-child {
+  margin-right: 1.5em;
+}
