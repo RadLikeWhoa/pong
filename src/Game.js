@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Player from './Player'
 import Paddle from './Paddle'
 import Ball from './Ball'
-import Bet from './Bet'
+import Bonus from './Bonus'
 import Target from './Target'
 import Defense from './Defense'
 import './Game.css'
@@ -22,19 +22,19 @@ class Game extends Component {
       },
       current: 1,
       overlay: {
-        bet: false,
+        bonus: false,
         target: false,
         defense: false
       },
       statement: {
-        bet: 0,
+        bonus: 0,
         target: null,
         claim: null,
         defense: null
       }
     }
 
-    this.onBetConfirmed = this.onBetConfirmed.bind(this)
+    this.onBonusSelected = this.onBonusSelected.bind(this)
     this.onTargetSelected = this.onTargetSelected.bind(this)
     this.onDefenseSelected = this.onDefenseSelected.bind(this)
   }
@@ -45,7 +45,7 @@ class Game extends Component {
     this.setState({
       overlay: {
         ...this.state.overlay,
-        bet: true
+        bonus: true
       }
     })
   }
@@ -81,16 +81,16 @@ class Game extends Component {
     })
   }
 
-  onBetConfirmed(val) {
+  onBonusSelected(bonus) {
     this.setState({
       statement: {
         ...this.state.statement,
-        bet: val
+        bonus
       },
       overlay: {
         ...this.state.overlay,
         target: true,
-        bet: false
+        bonus: false
       }
     })
   }
@@ -133,20 +133,23 @@ class Game extends Component {
           <Ball position={this.state.current === 1 ? 'left' : 'right'} />
           <Paddle position="right" />
         </section>
-        <Bet total={this.getCurrentAttacker().points}
-             visible={this.state.overlay.bet}
-             onConfirm={this.onBetConfirmed} />
-        <Target position={this.state.current === 1 ? 'right' : 'left'}
-                player={this.getCurrentAttacker()}
-                visible={this.state.overlay.target}
-                onSelect={this.onTargetSelected} />
-        <Defense position={this.state.current === 1 ? 'right' : 'left'}
-                 player={this.getCurrentDefender()}
-                 attacker={this.getCurrentAttacker()}
-                 claim={this.state.statement.claim}
-                 bet={this.state.statement.bet}
-                 visible={this.state.overlay.defense}
-                 onSelect={this.onDefenseSelected} />
+        {this.state.overlay.bonus && (
+          <Bonus total={this.getCurrentAttacker().points}
+                 onSelect={this.onBonusSelected} />
+        )}
+        {this.state.overlay.target && (
+          <Target position={this.state.current === 1 ? 'right' : 'left'}
+                  player={this.getCurrentAttacker()}
+                  onSelect={this.onTargetSelected} />
+        )}
+        {this.state.overlay.defense && (
+          <Defense position={this.state.current === 1 ? 'right' : 'left'}
+                   player={this.getCurrentDefender()}
+                   attacker={this.getCurrentAttacker()}
+                   claim={this.state.statement.claim}
+                   bonus={this.state.statement.bonus}
+                   onSelect={this.onDefenseSelected} />
+        )}
         <Player name={this.state.p2.name}
                 points={this.state.p2.points} />
       </main>

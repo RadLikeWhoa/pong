@@ -1,5 +1,5 @@
-.bet {
-  display: none;
+.bonus {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -11,6 +11,10 @@
   background-color: #000;
 }
 
-.bet.is-visible {
-  display: flex;
+.bonus .button {
+  display: inline-block;
+}
+
+.bonus .button:first-child {
+  margin-right: 1.5em;
 }

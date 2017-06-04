@@ -1,5 +1,5 @@
 .target {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
@@ -9,10 +9,6 @@
   left: 12em;
   right: 12em;
   padding-bottom: 1em;
-}
-
-.target.is-visible {
-  display: flex;
 }
 
 .target-right {
