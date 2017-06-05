@@ -30,7 +30,7 @@ class Bonus extends React.Component {
   render() {
     return (
       <div className="overlay bonus">
-        <h1>{this.props.player.name}, Use your double-up?</h1>
+        <h1>{this.props.player.name}, Use a double-up?</h1>
         <p>Gotta get them sweet bonus points!</p>
         <div>
           <button className="button"
