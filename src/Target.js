@@ -69,7 +69,7 @@ class Target extends React.Component {
 
   render() {
     return (
-      <div className={`target target-${this.props.position}`}>
+      <div className={`overlay target target-${this.props.position}`}>
         {this.state.step === 'target' ? (
           <div className="target-explanation">
             <h1>{this.props.player.name}, Select your target</h1>

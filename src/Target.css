@@ -1,24 +1,17 @@
-.target {
-  display: flex;
-  flex-direction: column;
+.overlay.target {
   justify-content: flex-end;
-  align-items: center;
-  position: absolute;
-  top: 2vh;
-  bottom: 2vh;
-  left: 12em;
-  right: 12em;
   padding-bottom: 1em;
+  background-color: transparent;
 }
 
-.target-right {
+.overlay.target-right {
   align-items: flex-start;
   padding-left: 1em;
   text-align: left;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, #000 50%);
 }
 
-.target-left {
+.overlay.target-left {
   align-items: flex-end;
   padding-right: 1em;
   text-align: right;

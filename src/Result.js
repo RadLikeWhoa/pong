@@ -1,5 +1,4 @@
 import React from 'react'
-import './Result.css'
 
 class Result extends React.Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class Result extends React.Component {
     const { player, points } = this.calculateScore()
 
     return (
-      <div className="result">
+      <div className="overlay result">
         <h1>{target === claim ?
           `${attacker.name} told the truth!` :
           `${attacker.name} bluffed!`

@@ -50,3 +50,16 @@ input {
 input:focus {
   cursor: text;
 }
+
+.overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 2vh;
+  bottom: 2vh;
+  left: 12em;
+  right: 12em;
+  background-color: #000;
+}

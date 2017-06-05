@@ -4,7 +4,7 @@ import './Intermediate.css'
 class Intermediate extends React.Component {
   constructor(props) {
     super(props)
-    
+
     this.keyHandler = this.keyHandler.bind(this)
     this.dismiss = this.dismiss.bind(this)
   }
@@ -34,7 +34,7 @@ class Intermediate extends React.Component {
 
   render() {
     return (
-      <div className="inter">
+      <div className="overlay inter">
         <h1>{this.props.text}<span className="ellipsis-wrapper"><span className="ellipsis">...</span></span></h1>
       </div>
     )

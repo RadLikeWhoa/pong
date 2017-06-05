@@ -1,24 +1,17 @@
-.defense {
-  display: flex;
-  flex-direction: column;
+.overlay.defense {
   justify-content: flex-end;
-  align-items: center;
-  position: absolute;
-  top: 2vh;
-  bottom: 2vh;
-  left: 12em;
-  right: 12em;
   padding-bottom: 1em;
+  background-color: transparent;
 }
 
-.defense-right {
+.overlay.defense-right {
   align-items: flex-end;
   padding-right: 6em;
   text-align: right;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, #000 50%);
 }
 
-.defense-left {
+.overlay.defense-left {
   align-items: flex-start;
   padding-left: 6em;
   text-align: left;
