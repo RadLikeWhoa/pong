@@ -67,7 +67,7 @@ class Result extends React.Component {
         <h1>{player.name} gets {points} points!</h1>
         <div className="button"
              onClick={this.props.onDismiss}>
-            Continue
+            Continue (Space)
         </div>
       </div>
     )

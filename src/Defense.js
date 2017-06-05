@@ -36,9 +36,9 @@ class Defense extends React.Component {
     const { upKey, downKey } = this.state
 
     if (e.key === upKey || e.key === upKey.toLowerCase()) {
-      this.selectDefense('up')
+      this.selectDefense('top')
     } else if (e.key === downKey || e.key === downKey.toLowerCase()) {
-      this.selectDefense('down')
+      this.selectDefense('bottom')
     }
   }
 
@@ -51,13 +51,13 @@ class Defense extends React.Component {
       <div className={`overlay defense defense-${this.props.position}`}>
         <div className="defense-explanation">
           <h1>{this.props.player.name}, Prepare your defense</h1>
-          <p>Is {this.props.attacker.name} really going for the {this.props.claim === 'up' ? 'TOP' : 'BOTTOM'}?{this.props.bonus && <span><br />A DOUBLE-UP is active!</span>}</p>
+          <p>Is {this.props.attacker.name} really going for the {this.props.claim === 'top' ? 'TOP' : 'BOTTOM'}?{this.props.bonus && <span><br />A DOUBLE-UP is active!</span>}</p>
         </div>
         <div className="defense-options">
           <div className="defense-top"
-               onClick={() => this.selectDefense('up')}>{`(${this.state.upKey})`}</div>
+               onClick={() => this.selectDefense('top')}>{`(${this.state.upKey})`}</div>
           <div className="defense-bottom"
-               onClick={() => this.selectDefense('down')}>{`(${this.state.downKey})`}</div>
+               onClick={() => this.selectDefense('bottom')}>{`(${this.state.downKey})`}</div>
         </div>
       </div>
     )

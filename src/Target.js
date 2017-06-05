@@ -7,7 +7,7 @@ class Target extends React.Component {
 
     this.state = {
       step: 'target',
-      target: 'up',
+      target: null,
       upKey: 'W',
       downKey: 'S'
     }
@@ -39,15 +39,15 @@ class Target extends React.Component {
 
     if (this.state.step === 'target') {
       if (e.key === upKey || e.key === upKey.toLowerCase()) {
-        this.selectTarget('up')
+        this.selectTarget('top')
       } else if (e.key === downKey || e.key === downKey.toLowerCase()) {
-        this.selectTarget('down')
+        this.selectTarget('bottom')
       }
     } else {
       if (e.key === upKey || e.key === upKey.toLowerCase()) {
-        this.selectClaim('up')
+        this.selectClaim('top')
       } else if (e.key === downKey || e.key === downKey.toLowerCase()) {
-        this.selectClaim('down')
+        this.selectClaim('bottom')
       }
     }
   }
@@ -82,17 +82,17 @@ class Target extends React.Component {
           </div>
         )}
         <div className="target-options">
-          <div className={`target-top ${this.state.step === 'claim' && this.state.target === 'down' ? 'is-hidden' : ''}`}
-               onClick={() => this.selectTarget('up')}>{this.state.step === 'target' && `(${this.state.upKey})`}</div>
-          <div className={`target-bottom ${this.state.step === 'claim' && this.state.target === 'up' ? 'is-hidden' : ''}`}
-               onClick={() => this.selectTarget('down')}>{this.state.step === 'target' && `(${this.state.downKey})`}</div>
+          <div className={`target-top ${this.state.step === 'claim' && this.state.target === 'bottom' ? 'is-hidden' : ''}`}
+               onClick={() => this.selectTarget('top')}>{this.state.step === 'target' && `(${this.state.upKey})`}</div>
+          <div className={`target-bottom ${this.state.step === 'claim' && this.state.target === 'top' ? 'is-hidden' : ''}`}
+               onClick={() => this.selectTarget('bottom')}>{this.state.step === 'target' && `(${this.state.downKey})`}</div>
         </div>
         {this.state.step === 'claim' && (
           <div className="claim-options">
             <div className="claim-top"
-                 onClick={() => this.selectClaim('up')}>{`(${this.state.upKey})`}</div>
+                 onClick={() => this.selectClaim('top')}>{`(${this.state.upKey})`}</div>
             <div className="claim-bottom"
-                 onClick={() => this.selectClaim('down')}>{`(${this.state.downKey})`}</div>
+                 onClick={() => this.selectClaim('bottom')}>{`(${this.state.downKey})`}</div>
           </div>
         )}
       </div>

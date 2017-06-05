@@ -40,7 +40,8 @@ class Game extends Component {
         defense: null
       },
       winner: null,
-      intermediate: null
+      intermediate: null,
+      strategy: null
     }
 
     this.onBonusSelected = this.onBonusSelected.bind(this)
@@ -48,35 +49,20 @@ class Game extends Component {
     this.onDefenseSelected = this.onDefenseSelected.bind(this)
     this.switchPlayers = this.switchPlayers.bind(this)
     this.settle = this.settle.bind(this)
+    this.checkWinCondition = this.checkWinCondition.bind(this)
+    this.startAnimation = this.startAnimation.bind(this)
+    this.calculateStrategy = this.calculateStrategy.bind(this)
   }
 
   componentDidMount() {
     const difficulty = this.props.match.params.difficulty
 
     this.setState({
-      goal: difficulty === 'short' ? 10 : difficulty === 'medium' ? 20 : 40,
+      goal: difficulty === 'short' ? 5 : difficulty === 'medium' ? 10 : 20,
       intermediate: `Get ready, ${this.getCurrentAttacker().name}`
     })
 
     this.getInitialBonuses()
-  }
-
-  componentDidUpdate() {
-    if (this.state.winner) {
-      return
-    }
-
-    if (this.state.p1.points >= this.state.goal) {
-      this.setState({
-        winner: this.state.p1,
-        intermediate: null
-      })
-    } else if (this.state.p2.points >= this.state.goal) {
-      this.setState({
-        winner: this.state.p2,
-        intermediate: null
-      })
-    }
   }
 
   settle() {
@@ -97,17 +83,84 @@ class Game extends Component {
           ...attacker,
           points: attacker.points + (claim !== target ? baseValue * 2 : baseValue)
         }
-      })
+      }, this.checkWinCondition)
     } else {
       this.setState({
         [this.state.current === 1 ? 'p2' : 'p1']: {
           ...defender,
           points: defender.points + (claim !== target ? 2 : 1)
         }
+      }, this.checkWinCondition)
+    }
+  }
+
+  checkWinCondition() {
+    const { p1, p2, goal } = this.state
+
+    if (p1.points >= goal) {
+      this.setState({
+        winner: p1,
+        intermediate: null
       })
+    } else if (p2.points >= goal) {
+      this.setState({
+        winner: p2,
+        intermediate: null
+      })
+    } else {
+      this.switchPlayers()
+    }
+  }
+
+  calculateStrategy() {
+    const rand = Math.round(Math.random() * 4)
+    const { target, defense } = this.state.statement
+    const direction = this.state.current === 1 ? 'ltr' : 'rtl'
+
+    this.setState({
+      strategy: `${target}-${direction}-${rand}${target === defense ? '-bounce' : ''} defend-${defense}-${rand}`
+    }, this.startAnimation)
+  }
+
+  startAnimation() {
+    const { strategy, overlay } = this.state
+
+    const strat = +(strategy[strategy.length - 1])
+    let duration = 0
+
+    switch (strat) {
+      case 0:
+        duration = 2000
+        break
+      case 1:
+        duration = 5000
+        break
+      case 2:
+        duration = 2000
+        break
+      case 3:
+        duration = 1500
+        break
+      case 4:
+        duration = 2500
+        break
+      default:
+        duration = 0
     }
 
-    this.switchPlayers()
+    if (strategy.indexOf('bounce') !== -1) {
+      duration += 1000
+    }
+
+    setTimeout(() => {
+      this.setState({
+        overlay: {
+          ...overlay,
+          result: true
+        },
+        strategy: null
+      })
+    }, duration)
   }
 
   switchPlayers() {
@@ -196,14 +249,13 @@ class Game extends Component {
       },
       overlay: {
         ...this.state.overlay,
-        result: true,
         defense: false
       }
-    })
+    }, this.calculateStrategy)
   }
 
   render() {
-    const { p1, p2, statement, current, overlay, winner, intermediate } = this.state
+    const { p1, p2, statement, current, overlay, winner, intermediate, strategy } = this.state
     const { bonus, claim, defense } = statement
 
     return (
@@ -212,10 +264,12 @@ class Game extends Component {
                 points={p1.points}
                 bonuses={p1.bonuses}
                 attacking={winner === null && defense === null && ((current === 1 && claim === null) || (current === 2 && claim !== null))} />
-        <section className="field">
-          <Paddle position="left" />
+        <section className={`field ${strategy || ''}`}>
+          <Paddle position="left"
+                  defending={current === 2} />
           <Ball position={current === 1 ? 'left' : 'right'} />
-          <Paddle position="right" />
+          <Paddle position="right"
+                  defending={current === 1} />
         </section>
         {intermediate && (
           <Intermediate text={intermediate}

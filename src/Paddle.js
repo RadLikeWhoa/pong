@@ -1,12 +1,8 @@
 import React from 'react'
 import './Paddle.css'
 
-class Paddle extends React.Component {
-  render() {
-    return (
-      <div className={`paddle paddle-${this.props.position}`}></div>
-    )
-  }
-}
+const Paddle = ({ position, defending }) => (
+  <div className={`paddle paddle-${position} ${defending ? 'is-defending' : ''}`}></div>
+)
 
 export default Paddle
