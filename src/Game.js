@@ -7,6 +7,7 @@ import Target from './Target'
 import Defense from './Defense'
 import GameOver from './GameOver'
 import Result from './Result'
+import Intermediate from './Intermediate'
 import './Game.css'
 
 class Game extends Component {
@@ -38,7 +39,8 @@ class Game extends Component {
         claim: null,
         defense: null
       },
-      winner: null
+      winner: null,
+      intermediate: null
     }
 
     this.onBonusSelected = this.onBonusSelected.bind(this)
@@ -52,7 +54,8 @@ class Game extends Component {
     const difficulty = this.props.match.params.difficulty
 
     this.setState({
-      goal: difficulty === 'short' ? 10 : difficulty === 'medium' ? 20 : 40
+      goal: difficulty === 'short' ? 10 : difficulty === 'medium' ? 20 : 40,
+      intermediate: `Get ready, ${this.getCurrentAttacker().name}`
     })
 
     this.getInitialBonuses()
@@ -119,7 +122,8 @@ class Game extends Component {
         result: false,
         bonus: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses > 0,
         target: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses === 0
-      }
+      },
+      intermediate: `Get ready, ${this.getCurrentDefender().name}`
     })
   }
 
@@ -177,7 +181,8 @@ class Game extends Component {
         ...this.state.overlay,
         target: false,
         defense: true
-      }
+      },
+      intermediate: `Get ready, ${this.state.current === 1 ? this.state.p2.name : this.state.p1.name}`
     })
   }
 
@@ -196,8 +201,8 @@ class Game extends Component {
   }
 
   render() {
-    const { p1, p2, statement, current, overlay, winner } = this.state
-    const { bonus, target, claim, defense } = statement
+    const { p1, p2, statement, current, overlay, winner, intermediate } = this.state
+    const { bonus, claim, defense } = statement
 
     return (
       <main className="game">
@@ -210,6 +215,10 @@ class Game extends Component {
           <Ball position={current === 1 ? 'left' : 'right'} />
           <Paddle position="right" />
         </section>
+        {intermediate && (
+          <Intermediate text={intermediate}
+                        onDismiss={() => this.setState({ intermediate: null })}/>
+        )}
         {overlay.bonus && (
           <Bonus total={this.getCurrentAttacker().points}
                  player={this.getCurrentAttacker()}

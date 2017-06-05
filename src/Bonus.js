@@ -16,6 +16,10 @@ class Bonus extends React.Component {
   }
 
   keyHandler(e) {
+    if (document.preventKeyPresses) {
+      return
+    }
+
     if (e.key === 'y' || e.key === 'Y') {
       this.props.onSelect(true)
     } else if (e.key === 'n' || e.key === 'N') {

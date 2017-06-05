@@ -1,0 +1,52 @@
+.inter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2vh;
+  bottom: 2vh;
+  left: 12em;
+  right: 12em;
+  background-color: #000;
+  z-index: 100;
+}
+
+.inter h1 {
+  margin-bottom: 0;
+}
+
+.ellipsis-wrapper {
+  display: inline-block;
+  width: 3em;
+}
+
+.ellipsis {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  animation: grow 4s steps(3);
+  animation-fill-mode: forwards;
+}
+
+@keyframes grow {
+  0%,
+  25% {
+    width: 0;
+  }
+
+  26%,
+  50% {
+    width: 1em;
+  }
+
+  51%,
+  75% {
+    width: 2em;
+  }
+
+  76%,
+  100% {
+    width: 3em;
+  }
+}

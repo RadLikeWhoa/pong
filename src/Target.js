@@ -31,6 +31,10 @@ class Target extends React.Component {
   }
 
   keyHandler(e) {
+    if (document.preventKeyPresses) {
+      return
+    }
+
     const { upKey, downKey } = this.state
 
     if (this.state.step === 'target') {

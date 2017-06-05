@@ -29,6 +29,10 @@ class Defense extends React.Component {
   }
 
   keyHandler(e) {
+    if (document.preventKeyPresses) {
+      return
+    }
+
     const { upKey, downKey } = this.state
 
     if (e.key === upKey || e.key === upKey.toLowerCase()) {

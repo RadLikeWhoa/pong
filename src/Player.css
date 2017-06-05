@@ -10,7 +10,7 @@
 }
 
 .player.is-attacking {
-  animation: blink 1s steps(1) infinite;
+  animation: blink 2s steps(1) infinite;
 }
 
 .score {
@@ -34,12 +34,13 @@
 
 @keyframes blink {
   0%,
-  75% {
+  30%,
+  51% {
     color: #000;
   }
 
-  76%,
-  100% {
+  31%,
+  50% {
     color: #fff;
   }
 }
