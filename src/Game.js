@@ -127,26 +127,26 @@ class Game extends Component {
 
     switch (strat) {
       case 0:
-        duration = 2000
+        duration = 2200
         break
       case 1:
         duration = 5000
         break
       case 2:
-        duration = 2500
+        duration = 2200
         break
       case 3:
-        duration = 1500
+        duration = 1700
         break
       case 4:
-        duration = 2000
+        duration = 2800
         break
       default:
         duration = 0
     }
 
     if (strategy.indexOf('bounce') !== -1) {
-      duration += 1000
+      duration += 900
     }
 
     setTimeout(() => {
