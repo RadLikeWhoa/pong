@@ -15,28 +15,12 @@
   display: inline-block;
   width: 0;
   overflow: hidden;
-  animation: grow 4s steps(3);
+  animation: grow 4s steps(4, end);
   animation-fill-mode: forwards;
 }
 
 @keyframes grow {
-  0%,
-  25% {
-    width: 0;
-  }
-
-  26%,
-  50% {
-    width: 1em;
-  }
-
-  51%,
-  75% {
-    width: 2em;
-  }
-
-  76%,
-  100% {
-    width: 3em;
+  to {
+    width: 4em;
   }
 }
