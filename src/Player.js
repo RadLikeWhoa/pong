@@ -6,12 +6,12 @@ class Player extends React.Component {
     super(props)
     this.generateBonuses = this.generateBonuses.bind(this)
   }
-  
+
   generateBonuses() {
     const bonuses = []
 
     for (let i = 0; i < this.props.bonuses; i++) {
-      bonuses.push(<div className="douple-up"></div>)
+      bonuses.push(<div className="douple-up" key={i}></div>)
     }
 
     return bonuses

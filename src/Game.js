@@ -6,6 +6,7 @@ import Bonus from './Bonus'
 import Target from './Target'
 import Defense from './Defense'
 import GameOver from './GameOver'
+import Result from './Result'
 import './Game.css'
 
 class Game extends Component {
@@ -29,7 +30,7 @@ class Game extends Component {
         bonus: true,
         target: false,
         defense: false,
-        over: false
+        result: false
       },
       statement: {
         bonus: false,
@@ -44,6 +45,7 @@ class Game extends Component {
     this.onTargetSelected = this.onTargetSelected.bind(this)
     this.onDefenseSelected = this.onDefenseSelected.bind(this)
     this.switchPlayers = this.switchPlayers.bind(this)
+    this.settle = this.settle.bind(this)
   }
 
   componentDidMount() {
@@ -61,21 +63,19 @@ class Game extends Component {
       return
     }
 
-    const { bonus, target, claim, defense } = this.state.statement
-
     if (this.state.p1.points >= this.state.goal) {
       this.setState({
         winner: this.state.p1
       })
-
-      return
     } else if (this.state.p2.points >= this.state.goal) {
       this.setState({
         winner: this.state.p2
       })
-
-      return
     }
+  }
+
+  settle() {
+    const { bonus, target, claim, defense } = this.state.statement
 
     if (defense === null) {
       return
@@ -116,6 +116,7 @@ class Game extends Component {
       },
       overlay: {
         ...this.state.overlay,
+        result: false,
         bonus: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses > 0,
         target: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses === 0
       }
@@ -188,6 +189,7 @@ class Game extends Component {
       },
       overlay: {
         ...this.state.overlay,
+        result: true,
         defense: false
       }
     })
@@ -221,6 +223,12 @@ class Game extends Component {
                    claim={this.state.statement.claim}
                    bonus={this.state.statement.bonus}
                    onSelect={this.onDefenseSelected} />
+        )}
+        {this.state.overlay.result && (
+          <Result attacker={this.getCurrentAttacker()}
+                  defender={this.getCurrentDefender()}
+                  statement={this.state.statement}
+                  onDismiss={this.settle} />
         )}
         {this.state.winner && (
           <GameOver winner={this.state.winner} />
