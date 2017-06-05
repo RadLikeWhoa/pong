@@ -156,7 +156,7 @@ class Game extends Component {
     this.setState({
       [this.state.current === 1 ? 'p1' : 'p2']: {
         ...attacker,
-        bonuses: attacker.bonuses - 1
+        bonuses: this.state.statement.bonus ? attacker.bonuses - 1 : attacker.bonuses
       },
       statement: {
         ...this.state.statement,
