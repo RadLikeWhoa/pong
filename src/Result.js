@@ -60,12 +60,10 @@ class Result extends React.Component {
           `${defender.name} defended!` :
           `${attacker.name} scored!`
         }</h1>
-        <h1>{bonus ? (
-          defense === target ?
-            'That double-up was wasted!' :
-            'Sweet, bonus points!'
-          ) : ''
-        }</h1>
+        {bonus && <h1>{defense === target ?
+          'That double-up was wasted!' :
+          'Sweet, bonus points!'
+        }</h1>}
         <h1>{player.name} gets {points} points!</h1>
         <div className="button"
              onClick={this.props.onDismiss}>
