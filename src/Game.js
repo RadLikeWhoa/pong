@@ -68,11 +68,13 @@ class Game extends Component {
 
     if (this.state.p1.points >= this.state.goal) {
       this.setState({
-        winner: this.state.p1
+        winner: this.state.p1,
+        intermediate: null
       })
     } else if (this.state.p2.points >= this.state.goal) {
       this.setState({
-        winner: this.state.p2
+        winner: this.state.p2,
+        intermediate: null
       })
     }
   }
@@ -123,7 +125,7 @@ class Game extends Component {
         bonus: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses > 0,
         target: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses === 0
       },
-      intermediate: `Get ready, ${this.getCurrentDefender().name}`
+      intermediate: this.state.winner === null ? `Get ready, ${this.getCurrentDefender().name}` : null
     })
   }
 
@@ -209,7 +211,7 @@ class Game extends Component {
         <Player name={p1.name}
                 points={p1.points}
                 bonuses={p1.bonuses}
-                attacking={defense === null && ((current === 1 && claim === null) || (current === 2 && claim !== null))} />
+                attacking={winner === null && defense === null && ((current === 1 && claim === null) || (current === 2 && claim !== null))} />
         <section className="field">
           <Paddle position="left" />
           <Ball position={current === 1 ? 'left' : 'right'} />
@@ -249,7 +251,7 @@ class Game extends Component {
         <Player name={p2.name}
                 points={p2.points}
                 bonuses={p2.bonuses}
-                attacking={defense === null && ((current === 2 && claim === null) || (current === 1 && claim !== null))} />
+                attacking={winner === null && defense === null && ((current === 2 && claim === null) || (current === 1 && claim !== null))} />
       </main>
     )
   }
