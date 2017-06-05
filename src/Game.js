@@ -197,7 +197,8 @@ class Game extends Component {
     return (
       <main className="game">
         <Player name={this.state.p1.name}
-                points={this.state.p1.points} />
+                points={this.state.p1.points}
+                bonuses={this.state.p1.bonuses} />
         <section className="field">
           <Paddle position="left" />
           <Ball position={this.state.current === 1 ? 'left' : 'right'} />
@@ -225,7 +226,8 @@ class Game extends Component {
           <GameOver winner={this.state.winner} />
         )}
         <Player name={this.state.p2.name}
-                points={this.state.p2.points} />
+                points={this.state.p2.points}
+                bonuses={this.state.p2.bonuses} />
       </main>
     )
   }
