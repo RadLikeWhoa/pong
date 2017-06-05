@@ -1,0 +1,9 @@
+.rules {
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+.rules .button {
+  width: 10em;
+  margin: 0 auto;
+}
