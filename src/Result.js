@@ -48,7 +48,7 @@ class Result extends React.Component {
           `${attacker.name} told the truth!` :
           `${attacker.name} bluffed!`
         }</h1>
-        <h1>{defense === claim ?
+        <h1>{defense === target ?
           (target === claim ?
             `${defender.name} belived!` :
             `${defender.name} saw right through it!`) :
