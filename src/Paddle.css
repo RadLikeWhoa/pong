@@ -18,13 +18,13 @@
 /* stylelint-disable */
 
 .defend-top-0 .is-defending { top: 20vh; transition-delay: 1s; }
-.defend-top-1 .is-defending { top: 5vh; transition-delay: 4s; }
+.defend-top-1 .is-defending { top: 5vh; transition-delay: 3s; }
 .defend-top-2 .is-defending { top: 0vh; transition-delay: 1s; }
 .defend-top-3 .is-defending { top: 20vh; transition-delay: 0.5s; }
 .defend-top-4 .is-defending { top: 0vh; transition-delay: 1.5s; }
 
 .defend-bottom-0 .is-defending { top: 55vh; transition-delay: 1s; }
-.defend-bottom-1 .is-defending { top: 75vh; transition-delay: 4s; }
+.defend-bottom-1 .is-defending { top: 75vh; transition-delay: 3s; }
 .defend-bottom-2 .is-defending { top: 75vh; transition-delay: 1s; }
 .defend-bottom-3 .is-defending { top: 55vh; transition-delay: 0.5s; }
 .defend-bottom-4 .is-defending { top: 75vh; transition-delay: 1.5s; }
