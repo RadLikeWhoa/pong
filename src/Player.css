@@ -9,6 +9,10 @@
   text-align: center;
 }
 
+.player.is-attacking {
+  animation: blink 1s steps(1) infinite;
+}
+
 .score {
   font-size: 4em;
   line-height: 1.125;
@@ -25,5 +29,17 @@
 .douple-up {
   width: 1em;
   height: 1em;
-  background-color: #000;
+  background-color: currentColor;
+}
+
+@keyframes blink {
+  0%,
+  75% {
+    color: #000;
+  }
+
+  76%,
+  100% {
+    color: #fff;
+  }
 }

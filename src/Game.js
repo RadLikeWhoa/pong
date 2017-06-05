@@ -196,46 +196,51 @@ class Game extends Component {
   }
 
   render() {
+    const { p1, p2, statement, current, overlay, winner } = this.state
+    const { bonus, target, claim, defense } = statement
+
     return (
       <main className="game">
-        <Player name={this.state.p1.name}
-                points={this.state.p1.points}
-                bonuses={this.state.p1.bonuses} />
+        <Player name={p1.name}
+                points={p1.points}
+                bonuses={p1.bonuses}
+                attacking={defense === null && ((current === 1 && claim === null) || (current === 2 && claim !== null))} />
         <section className="field">
           <Paddle position="left" />
-          <Ball position={this.state.current === 1 ? 'left' : 'right'} />
+          <Ball position={current === 1 ? 'left' : 'right'} />
           <Paddle position="right" />
         </section>
-        {this.state.overlay.bonus && (
+        {overlay.bonus && (
           <Bonus total={this.getCurrentAttacker().points}
                  player={this.getCurrentAttacker()}
                  onSelect={this.onBonusSelected} />
         )}
-        {this.state.overlay.target && (
-          <Target position={this.state.current === 1 ? 'right' : 'left'}
+        {overlay.target && (
+          <Target position={current === 1 ? 'right' : 'left'}
                   player={this.getCurrentAttacker()}
                   onSelect={this.onTargetSelected} />
         )}
-        {this.state.overlay.defense && (
-          <Defense position={this.state.current === 1 ? 'right' : 'left'}
+        {overlay.defense && (
+          <Defense position={current === 1 ? 'right' : 'left'}
                    player={this.getCurrentDefender()}
                    attacker={this.getCurrentAttacker()}
-                   claim={this.state.statement.claim}
-                   bonus={this.state.statement.bonus}
+                   claim={claim}
+                   bonus={bonus}
                    onSelect={this.onDefenseSelected} />
         )}
-        {this.state.overlay.result && (
+        {overlay.result && (
           <Result attacker={this.getCurrentAttacker()}
                   defender={this.getCurrentDefender()}
-                  statement={this.state.statement}
+                  statement={statement}
                   onDismiss={this.settle} />
         )}
-        {this.state.winner && (
-          <GameOver winner={this.state.winner} />
+        {winner && (
+          <GameOver winner={winner} />
         )}
-        <Player name={this.state.p2.name}
-                points={this.state.p2.points}
-                bonuses={this.state.p2.bonuses} />
+        <Player name={p2.name}
+                points={p2.points}
+                bonuses={p2.bonuses}
+                attacking={defense === null && ((current === 2 && claim === null) || (current === 1 && claim !== null))} />
       </main>
     )
   }
