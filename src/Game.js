@@ -27,12 +27,7 @@ class Game extends Component {
         bonuses: 0
       },
       current: 1,
-      overlay: {
-        bonus: true,
-        target: false,
-        defense: false,
-        result: false
-      },
+      overlay: 'bonus',
       statement: {
         bonus: false,
         target: null,
@@ -100,12 +95,14 @@ class Game extends Component {
     if (p1.points >= goal) {
       this.setState({
         winner: p1,
-        intermediate: null
+        intermediate: null,
+        overlay: null
       })
     } else if (p2.points >= goal) {
       this.setState({
         winner: p2,
-        intermediate: null
+        intermediate: null,
+        overlay: null
       })
     } else {
       this.switchPlayers()
@@ -123,7 +120,7 @@ class Game extends Component {
   }
 
   startAnimation() {
-    const { strategy, overlay } = this.state
+    const { strategy } = this.state
 
     const strat = +(strategy[strategy.length - 1])
     let duration = 0
@@ -136,13 +133,13 @@ class Game extends Component {
         duration = 5000
         break
       case 2:
-        duration = 2000
+        duration = 2500
         break
       case 3:
         duration = 1500
         break
       case 4:
-        duration = 2500
+        duration = 2000
         break
       default:
         duration = 0
@@ -154,10 +151,7 @@ class Game extends Component {
 
     setTimeout(() => {
       this.setState({
-        overlay: {
-          ...overlay,
-          result: true
-        },
+        overlay: 'result',
         strategy: null
       })
     }, duration)
@@ -172,12 +166,7 @@ class Game extends Component {
         claim: null,
         defense: null
       },
-      overlay: {
-        ...this.state.overlay,
-        result: false,
-        bonus: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses > 0,
-        target: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses === 0
-      },
+      overlay: (this.state.current === 1 ? this.state.p2 : this.state.p1).bonuses > 0 ? 'bonus' : 'target',
       intermediate: this.state.winner === null ? `Get ready, ${this.getCurrentDefender().name}` : null
     })
   }
@@ -217,11 +206,7 @@ class Game extends Component {
         ...this.state.statement,
         bonus
       },
-      overlay: {
-        ...this.state.overlay,
-        target: true,
-        bonus: false
-      }
+      overlay: 'target'
     })
   }
 
@@ -232,11 +217,7 @@ class Game extends Component {
         target,
         claim
       },
-      overlay: {
-        ...this.state.overlay,
-        target: false,
-        defense: true
-      },
+      overlay: 'defense',
       intermediate: `Get ready, ${this.state.current === 1 ? this.state.p2.name : this.state.p1.name}`
     })
   }
@@ -247,10 +228,7 @@ class Game extends Component {
         ...this.state.statement,
         defense
       },
-      overlay: {
-        ...this.state.overlay,
-        defense: false
-      }
+      overlay: null
     }, this.calculateStrategy)
   }
 
@@ -275,17 +253,17 @@ class Game extends Component {
           <Intermediate text={intermediate}
                         onDismiss={() => this.setState({ intermediate: null })}/>
         )}
-        {overlay.bonus && (
+        {overlay === 'bonus' && (
           <Bonus total={this.getCurrentAttacker().points}
                  player={this.getCurrentAttacker()}
                  onSelect={this.onBonusSelected} />
         )}
-        {overlay.target && (
+        {overlay === 'target' && (
           <Target position={current === 1 ? 'right' : 'left'}
                   player={this.getCurrentAttacker()}
                   onSelect={this.onTargetSelected} />
         )}
-        {overlay.defense && (
+        {overlay === 'defense' && (
           <Defense position={current === 1 ? 'right' : 'left'}
                    player={this.getCurrentDefender()}
                    attacker={this.getCurrentAttacker()}
@@ -293,15 +271,13 @@ class Game extends Component {
                    bonus={bonus}
                    onSelect={this.onDefenseSelected} />
         )}
-        {overlay.result && (
+        {overlay === 'result' && (
           <Result attacker={this.getCurrentAttacker()}
                   defender={this.getCurrentDefender()}
                   statement={statement}
                   onDismiss={this.settle} />
         )}
-        {winner && (
-          <GameOver winner={winner} />
-        )}
+        {winner && <GameOver winner={winner} />}
         <Player name={p2.name}
                 points={p2.points}
                 bonuses={p2.bonuses}
