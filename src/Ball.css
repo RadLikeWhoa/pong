@@ -5,6 +5,7 @@
   width: 2vh;
   background-color: #fff;
   animation-fill-mode: forwards !important;
+  will-change: top, left, right;
 }
 
 .ball-left {

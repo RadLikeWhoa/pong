@@ -5,6 +5,7 @@
   height: 20vh;
   background-color: #fff;
   transition: top 1s linear;
+  will-change: top;
 }
 
 .paddle-left {
