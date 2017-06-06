@@ -81,12 +81,14 @@ class Target extends React.Component {
             <p>Wanna bluff?</p>
           </div>
         )}
-        <div className="target-options">
-          <div className={`target-top ${this.state.step === 'claim' && this.state.target === 'bottom' ? 'is-hidden' : ''}`}
-               onClick={() => this.selectTarget('top')}>{this.state.step === 'target' && `(${this.state.upKey})`}</div>
-          <div className={`target-bottom ${this.state.step === 'claim' && this.state.target === 'top' ? 'is-hidden' : ''}`}
-               onClick={() => this.selectTarget('bottom')}>{this.state.step === 'target' && `(${this.state.downKey})`}</div>
-        </div>
+        {this.state.step === 'target' && (
+          <div className="target-options">
+            <div className="target-top"
+                 onClick={() => this.selectTarget('top')}>{this.state.step === 'target' && `(${this.state.upKey})`}</div>
+            <div className="target-bottom"
+                 onClick={() => this.selectTarget('bottom')}>{this.state.step === 'target' && `(${this.state.downKey})`}</div>
+          </div>
+        )}
         {this.state.step === 'claim' && (
           <div className="claim-options">
             <div className="claim-top"

@@ -30,20 +30,14 @@
   width: 4em;
 }
 
-.target-right .target-options {
+.target-right .target-options,
+.target-right .claim-options {
   right: 1em;
 }
 
-.target-left .target-options {
-  left: 1em;
-}
-
-.target-right .claim-options {
-  right: 6em;
-}
-
+.target-left .target-options,
 .target-left .claim-options {
-  left: 6em;
+  left: 1em;
 }
 
 .target-options div,
@@ -68,8 +62,4 @@
 .target-options .target-bottom,
 .claim-options .claim-bottom {
   bottom: 0;
-}
-
-.target-options .is-hidden {
-  display: none;
 }
