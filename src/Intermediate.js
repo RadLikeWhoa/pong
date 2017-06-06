@@ -10,7 +10,7 @@ class Intermediate extends React.Component {
   }
 
   componentDidMount() {
-    this.dismissTimeout = setTimeout(this.dismiss, 4500)
+    this.dismissTimeout = setTimeout(this.dismiss, 3000)
 
     document.preventKeyPresses = true
     document.addEventListener('keypress', this.keyHandler, false)
