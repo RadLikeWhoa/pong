@@ -3,11 +3,21 @@ import React from 'react'
 class Result extends React.Component {
   constructor(props) {
     super(props)
+
+    this.audioSuccess = new Audio('/touch_success.wav');
+    this.audioFail = new Audio('/touch_fail.wav');
+
     this.keyHandler = this.keyHandler.bind(this)
   }
 
   componentDidMount() {
     document.addEventListener('keypress', this.keyHandler, false)
+
+    if(this.props.statement.defense === this.props.statement.target) {
+      this.audioSuccess.play();
+    } else {
+      this.audioFail.play();
+    }
   }
 
   componentWillUnmount() {

@@ -14,6 +14,8 @@ class Game extends Component {
   constructor(props) {
     super(props)
 
+    this.audioStart = new Audio('/touch.wav');
+
     this.state = {
       goal: Infinity,
       p1: {
@@ -47,6 +49,14 @@ class Game extends Component {
     this.checkWinCondition = this.checkWinCondition.bind(this)
     this.startAnimation = this.startAnimation.bind(this)
     this.calculateStrategy = this.calculateStrategy.bind(this)
+
+    this.ballBounces = [
+      [1000, 2000],
+      [600, 1500, 2500, 3500, 4350, 5000],
+      [800, 2000],
+      [1500],
+      [875, 2250, 2500]
+    ];
   }
 
   componentDidMount() {
@@ -122,6 +132,8 @@ class Game extends Component {
   startAnimation() {
     const { strategy } = this.state
 
+    this.audioStart.play();
+
     const strat = +(strategy[strategy.length - 1])
     let duration = 0
 
@@ -144,6 +156,14 @@ class Game extends Component {
       default:
         duration = 0
     }
+
+    let ballBounces = this.ballBounces[strat];
+
+    ballBounces.forEach((val) => {
+      setTimeout(() => {
+        this.audioStart.play();
+      }, val);
+    });
 
     if (strategy.indexOf('bounce') !== -1) {
       duration += 900
