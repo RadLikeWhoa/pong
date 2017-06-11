@@ -129,7 +129,7 @@ class Game extends Component {
   }
 
   calculateStrategy() {
-    const rand = 4 // Math.round(Math.random() * 4)
+    const rand = Math.round(Math.random() * 4)
     const { target, defense } = this.state.statement
     const direction = this.state.current === 1 ? 'ltr' : 'rtl'
 
