@@ -14,13 +14,15 @@ class Result extends React.Component {
     document.addEventListener('keypress', this.keyHandler, false)
 
     if (this.props.statement.defense === this.props.statement.target) {
-      this.audioSuccess.play()
-    } else {
       this.audioFail.play()
+    } else {
+      this.audioSuccess.play()
     }
   }
 
   componentWillUnmount() {
+    this.audioSuccess.pause()
+    this.audioFail.pause()
     document.removeEventListener('keypress', this.keyHandler)
   }
 

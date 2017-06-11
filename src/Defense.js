@@ -5,6 +5,8 @@ class Defense extends React.Component {
   constructor(props) {
     super(props)
 
+    this.audio = new Audio(`${process.env.PUBLIC_URL}/move1.wav`)
+
     this.state = {
       upKey: 'P',
       downKey: 'L'
@@ -43,6 +45,7 @@ class Defense extends React.Component {
   }
 
   selectDefense(defense) {
+    this.audio.play()
     this.props.onSelect(defense)
   }
 

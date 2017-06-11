@@ -14,7 +14,7 @@ class Game extends Component {
   constructor(props) {
     super(props)
 
-    this.audioStart = new Audio(`${process.env.PUBLIC_URL}/touch.wav`)
+    this.audio = new Audio(`${process.env.PUBLIC_URL}/touch.wav`)
 
     this.state = {
       goal: Infinity,
@@ -50,13 +50,22 @@ class Game extends Component {
     this.startAnimation = this.startAnimation.bind(this)
     this.calculateStrategy = this.calculateStrategy.bind(this)
 
-    this.ballBounces = [
-      [1000, 2000],
-      [600, 1500, 2500, 3500, 4350, 5000],
-      [800, 2000],
-      [1500],
-      [875, 2250, 2500]
-    ]
+    this.ballBounces = [{
+      score: [ 800 ],
+      block: [ 800, 1600 ],
+    }, {
+      score: [ 500, 1300, 2300, 3300, 4150 ],
+      block: [ 500, 1400, 2400, 3400, 4150, 4250 ]
+    }, {
+      score: [ 800, 1900 ],
+      block: [ 800, 1850, 1950 ]
+    }, {
+      score: [],
+      block: [ 1350 ]
+    }, {
+      score: [ 750, 2000 ],
+      block: [ 750, 2000, 2250 ]
+    }]
   }
 
   componentDidMount() {
@@ -120,7 +129,7 @@ class Game extends Component {
   }
 
   calculateStrategy() {
-    const rand = Math.round(Math.random() * 4)
+    const rand = 4 // Math.round(Math.random() * 4)
     const { target, defense } = this.state.statement
     const direction = this.state.current === 1 ? 'ltr' : 'rtl'
 
@@ -132,9 +141,8 @@ class Game extends Component {
   startAnimation() {
     const { strategy } = this.state
 
-    this.audioStart.play()
-
     const strat = +(strategy[strategy.length - 1])
+    const isDefending = strategy.indexOf('bounce') !== -1
     let duration = 0
 
     switch (strat) {
@@ -157,11 +165,18 @@ class Game extends Component {
         duration = 0
     }
 
-    let ballBounces = this.ballBounces[strat]
+    let ballBounces = this.ballBounces[strat][isDefending ? 'block' : 'score']
 
-    ballBounces.forEach(val => setTimeout(this.audioStart.play, val))
+    ballBounces.forEach(val => setTimeout(() => {
+      if (!this.audio.paused) {
+        console.log('create clone')
+        this.audio.cloneNode(true).play()
+      } else {
+        this.audio.play()
+      }
+    }, val))
 
-    if (strategy.indexOf('bounce') !== -1) {
+    if (isDefending) {
       duration += 900
     }
 
@@ -191,11 +206,11 @@ class Game extends Component {
     this.setState({
       p1: {
         ...this.state.p1,
-        bonuses: difficulty === 'short' ? 1 : difficulty === 'medium' ? 2 : 3
+        bonuses: difficulty === 'short' ? 0 : difficulty === 'medium' ? 2 : 3
       },
       p2: {
         ...this.state.p2,
-        bonuses: difficulty === 'short' ? 1 : difficulty === 'medium' ? 2 : 3
+        bonuses: difficulty === 'short' ? 0 : difficulty === 'medium' ? 2 : 3
       }
     })
   }

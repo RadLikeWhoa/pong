@@ -4,7 +4,11 @@ import './Bonus.css'
 class Bonus extends React.Component {
   constructor(props) {
     super(props)
+
+    this.audio = new Audio(`${process.env.PUBLIC_URL}/touch.wav`)
+    
     this.keyHandler = this.keyHandler.bind(this)
+    this.selectBonus = this.selectBonus.bind(this)
   }
 
   componentDidMount() {
@@ -21,10 +25,15 @@ class Bonus extends React.Component {
     }
 
     if (e.key === 'y' || e.key === 'Y') {
-      this.props.onSelect(true)
+      this.selectBonus(true)
     } else if (e.key === 'n' || e.key === 'N') {
-      this.props.onSelect(false)
+      this.selectBonus(false)
     }
+  }
+
+  selectBonus(state) {
+    this.audio.play()
+    this.props.onSelect(state)
   }
 
   render() {

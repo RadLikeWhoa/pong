@@ -5,8 +5,8 @@ class Target extends React.Component {
   constructor(props) {
     super(props)
 
-    this.audio1 = new Audio(`${process.env.PUBLIC_URL}/move1.wav`)
-    this.audio2 = new Audio(`${process.env.PUBLIC_URL}/move2.wav`)
+    this.audioTarget = new Audio(`${process.env.PUBLIC_URL}/move1.wav`)
+    this.audioClaim = new Audio(`${process.env.PUBLIC_URL}/move2.wav`)
 
     this.state = {
       step: 'target',
@@ -41,16 +41,12 @@ class Target extends React.Component {
     const { upKey, downKey } = this.state
 
     if (this.state.step === 'target') {
-      this.audio1.play()
-
       if (e.key === upKey || e.key === upKey.toLowerCase()) {
         this.selectTarget('top')
       } else if (e.key === downKey || e.key === downKey.toLowerCase()) {
         this.selectTarget('bottom')
       }
     } else {
-      this.audio2.play()
-
       if (e.key === upKey || e.key === upKey.toLowerCase()) {
         this.selectClaim('top')
       } else if (e.key === downKey || e.key === downKey.toLowerCase()) {
@@ -64,6 +60,8 @@ class Target extends React.Component {
       return
     }
 
+    this.audioTarget.play()
+
     this.setState({
       target,
       step: 'claim'
@@ -71,6 +69,7 @@ class Target extends React.Component {
   }
 
   selectClaim(claim) {
+    this.audioClaim.play()
     this.props.onSelect(this.state.target, claim)
   }
 
