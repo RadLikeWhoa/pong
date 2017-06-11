@@ -14,7 +14,7 @@ class Game extends Component {
   constructor(props) {
     super(props)
 
-    this.audioStart = new Audio('/touch.wav');
+    this.audioStart = new Audio(`${process.env.PUBLIC_URL}/touch.wav`)
 
     this.state = {
       goal: Infinity,
@@ -56,7 +56,7 @@ class Game extends Component {
       [800, 2000],
       [1500],
       [875, 2250, 2500]
-    ];
+    ]
   }
 
   componentDidMount() {
@@ -132,7 +132,7 @@ class Game extends Component {
   startAnimation() {
     const { strategy } = this.state
 
-    this.audioStart.play();
+    this.audioStart.play()
 
     const strat = +(strategy[strategy.length - 1])
     let duration = 0
@@ -157,24 +157,18 @@ class Game extends Component {
         duration = 0
     }
 
-    let ballBounces = this.ballBounces[strat];
+    let ballBounces = this.ballBounces[strat]
 
-    ballBounces.forEach((val) => {
-      setTimeout(() => {
-        this.audioStart.play();
-      }, val);
-    });
+    ballBounces.forEach(val => setTimeout(this.audioStart.play, val))
 
     if (strategy.indexOf('bounce') !== -1) {
       duration += 900
     }
 
-    setTimeout(() => {
-      this.setState({
-        overlay: 'result',
-        strategy: null
-      })
-    }, duration)
+    setTimeout(() => this.setState({
+      overlay: 'result',
+      strategy: null
+    }), duration)
   }
 
   switchPlayers() {

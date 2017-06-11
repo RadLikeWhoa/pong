@@ -7,7 +7,7 @@ import Rules from './Rules'
 import './index.css'
 
 render(
-  <Router>
+  <Router baseName={process.env.PUBLIC_URL}>
     <div>
       <Route exact path="/" component={Menu} />
       <Route path="/game/:difficulty" component={Game} />
