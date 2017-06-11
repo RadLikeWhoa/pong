@@ -6,6 +6,10 @@ class Menu extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      muted: false
+    }
+
     this.audio = new Audio(`${process.env.PUBLIC_URL}/pong.mp3`)
 
     this.audio.addEventListener('ended', function() {
@@ -22,6 +26,7 @@ class Menu extends React.Component {
 
   toggleMute() {
     this.audio.muted = !this.audio.muted
+    this.setState({ muted: this.audio.muted })
   }
 
   render() {
@@ -34,7 +39,7 @@ class Menu extends React.Component {
           <li><Link to="/game/medium" className="button">Medium game</Link></li>
           <li><Link to="/game/long" className="button">Long game</Link></li>
           <li><Link to="/rules" className="button">Rules</Link></li>
-          <li><Link to="#" className="button" onClick={() => this.toggleMute() }>Mute</Link></li>
+          <li><Link to="#" className="button" onClick={() => this.toggleMute()}>{this.state.muted ? 'Unmute' : 'Mute'}</Link></li>
         </ul>
       </main>
     )

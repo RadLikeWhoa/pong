@@ -7,11 +7,11 @@ import Rules from './Rules'
 import './index.css'
 
 render(
-  <Router baseName={process.env.PUBLIC_URL}>
+  <Router basename={process.env.PUBLIC_URL}>
     <div>
       <Route exact path="/" component={Menu} />
-      <Route path="/game/:difficulty" component={Game} />
-      <Route path="/rules" component={Rules} />
+      <Route path="/game/:difficulty/" component={Game} />
+      <Route path="/rules/" component={Rules} />
     </div>
   </Router>,
   document.getElementById('game')
