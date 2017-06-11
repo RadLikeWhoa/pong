@@ -55,7 +55,7 @@ class Game extends Component {
       block: [ 800, 1600 ],
     }, {
       score: [ 500, 1300, 2300, 3300, 4150 ],
-      block: [ 500, 1400, 2400, 3400, 4150, 4250 ]
+      block: [ 500, 1400, 2400, 3400, 4150, 4300 ]
     }, {
       score: [ 800, 1900 ],
       block: [ 800, 1850, 1950 ]
@@ -206,11 +206,11 @@ class Game extends Component {
     this.setState({
       p1: {
         ...this.state.p1,
-        bonuses: difficulty === 'short' ? 0 : difficulty === 'medium' ? 2 : 3
+        bonuses: difficulty === 'short' ? 1 : difficulty === 'medium' ? 2 : 3
       },
       p2: {
         ...this.state.p2,
-        bonuses: difficulty === 'short' ? 0 : difficulty === 'medium' ? 2 : 3
+        bonuses: difficulty === 'short' ? 1 : difficulty === 'medium' ? 2 : 3
       }
     })
   }
