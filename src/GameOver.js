@@ -5,8 +5,15 @@ import './GameOver.css'
 class GameOver extends React.Component {
   constructor(props) {
     super(props)
-    this.audioGameOver = new Audio(`${process.env.PUBLIC_URL}/game_over.mp3`)
-	  this.audioGameOver.play()
+    this.audio = new Audio(`${process.env.PUBLIC_URL}/game_over.mp3`)
+  }
+
+  componentDidMount() {
+    this.audio.play()
+  }
+
+  componentWillUnmount() {
+    this.audio.pause()
   }
 
   render() {
